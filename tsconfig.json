@@ -13,11 +13,7 @@
     "removeComments": true, // Removes comments from the output JavaScript files
     "allowJs": false, // Not allow JavaScript files to be compiled
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "paths": {
-      "@/*": ["./src/*"],
-      "@uploads/*": ["./public/uploads/*"]
-    }
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*.ts" // Path to your TypeScript files
