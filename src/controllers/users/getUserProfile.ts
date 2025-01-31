@@ -10,10 +10,10 @@ const userSchema = Joi.object({
 
 const getUserProfile = catchAsync(async (req: Request, res: Response) => {
   try {
-    const validatedBody = validateJoiSchema(userSchema, req.body);
+    const validatedBody = validateJoiSchema(userSchema, req.params);
     const resData = await userService.getUserProfile(validatedBody.id);
     res.status(201).json({
-      code: 201,
+      code: 200,
       message: 'User get profile successfully',
       data: resData,
     });

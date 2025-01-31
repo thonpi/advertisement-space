@@ -36,7 +36,7 @@ router.get('/', (req: Request, res: Response) => {
 
 // User routes
 router.route('/users').get(isAdmin as any, userPagination);
-router.route('/user-profile').get(getUserProfile).put(updateUserProfile);
+router.route('/user-profile/:id').get(getUserProfile).put(updateUserProfile);
 router.route('/auth/logout').post(logout);
 
 // Advertisement space routes
