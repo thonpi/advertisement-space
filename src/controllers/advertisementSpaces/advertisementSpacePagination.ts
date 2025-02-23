@@ -4,6 +4,7 @@ import advertisementSpaceService from '../../services/advertisementSpace';
 
 const advertisementSpacePagination = catchAsync(
   async (req: Request, res: Response) => {
+    console.log({ user: (req as any).user });
     try {
       const resData =
         await advertisementSpaceService.advertisementSpacePagination({

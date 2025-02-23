@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import { validateJoiSchema } from '../../utils/joi';
 import designJobService from '../../services/designJob';
 
@@ -8,7 +7,7 @@ const designJobSchema = Joi.object({
   id: Joi.string().required(),
 });
 
-const deleteDesignJob = catchAsync(async (req: Request, res: Response) => {
+const deleteDesignJob = async (req: Request, res: Response) => {
   try {
     const validatedBody = validateJoiSchema(designJobSchema, req.body);
     const resData = await designJobService.deleteDesignJob(validatedBody.id);
@@ -24,6 +23,6 @@ const deleteDesignJob = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default deleteDesignJob;

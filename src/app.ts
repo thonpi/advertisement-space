@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 
 const swaggerUi = require('swagger-ui-express');
@@ -10,9 +11,8 @@ import publicRouter from './routers/public-router';
 
 const app = express();
 
-const PORT = 3000;
-
 app.use(express.static('public'));
+app.use(cors());
 
 // Swagger route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -21,9 +21,11 @@ app.use(express.json());
 app.use(publicRouter);
 app.use(router);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Swagger Docs available at http://localhost:${PORT}/api-docs`);
+app.listen(env.PORT, '0.0.0.0', () => {
+  console.log(`Server running on http://localhost:${env.PORT}`);
+  console.log(
+    `Swagger Docs available at http://localhost:${env.PORT}/api-docs`
+  );
 });
 
 mongoose

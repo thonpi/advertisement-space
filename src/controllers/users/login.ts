@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import userService from '../../services/user';
 import { validateJoiSchema } from '../../utils/joi';
 
@@ -16,8 +15,9 @@ const userSchema = Joi.object({
   password: Joi.string().required(),
 });
 
-const login = catchAsync(async (req: Request, res: Response) => {
+const login = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
     const validatedBody = validateJoiSchema(userSchema, req.body);
     const resData = await userService.login(
       validatedBody.phoneNumber,
@@ -34,6 +34,6 @@ const login = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default login;

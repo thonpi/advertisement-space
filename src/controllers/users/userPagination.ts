@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import userService from '../../services/user';
 
-const userPagination = catchAsync(async (req: Request, res: Response) => {
+const userPagination = async (req: Request, res: Response) => {
   try {
     const resData = await userService.userPagination({
       page: parseInt(req.query.page || ('1' as any)),
@@ -24,6 +23,6 @@ const userPagination = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default userPagination;

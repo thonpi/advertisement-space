@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import userService from '../../services/user';
 import { validateJoiSchema } from '../../utils/joi';
 
@@ -8,7 +7,7 @@ const userSchema = Joi.object({
   id: Joi.string().required(),
 });
 
-const getUserProfile = catchAsync(async (req: Request, res: Response) => {
+const getUserProfile = async (req: Request, res: Response) => {
   try {
     const validatedBody = validateJoiSchema(userSchema, req.params);
     const resData = await userService.getUserProfile(validatedBody.id);
@@ -23,6 +22,6 @@ const getUserProfile = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default getUserProfile;

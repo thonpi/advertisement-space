@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import designJobService from '../../services/designJob';
 
-const getAllDesignJobs = catchAsync(async (req: Request, res: Response) => {
+const getAllDesignJobs = async (req: Request, res: Response) => {
   try {
     const resData = await designJobService.getAllDesignJobs();
     res.status(200).json({
@@ -16,6 +15,6 @@ const getAllDesignJobs = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default getAllDesignJobs;

@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import { validateJoiSchema } from '../../utils/joi';
 import designJobService from '../../services/designJob';
 
@@ -20,7 +19,7 @@ const designJobSchema = Joi.object({
     .default('UNDER_JOB_MARKET'),
 });
 
-const updateDesignJob = catchAsync(async (req: Request, res: Response) => {
+const updateDesignJob = async (req: Request, res: Response) => {
   try {
     const validatedBody = validateJoiSchema(designJobSchema, req.body);
     const resData = await designJobService.updateDesignJob(
@@ -39,6 +38,6 @@ const updateDesignJob = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default updateDesignJob;

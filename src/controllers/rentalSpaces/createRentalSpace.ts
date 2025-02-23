@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import { validateJoiSchema } from '../../utils/joi';
 import rentalSpaceService from '../../services/rentalSpace';
 
@@ -19,7 +18,7 @@ const rentalSpaceSchema = Joi.object({
     .default('UNDER_RENT_MARKET'),
 });
 
-const createRentalSpace = catchAsync(async (req: Request, res: Response) => {
+const createRentalSpace = async (req: Request, res: Response) => {
   try {
     const validatedBody = validateJoiSchema(rentalSpaceSchema, req.body);
     const resData = await rentalSpaceService.createRentalSpace(validatedBody);
@@ -34,6 +33,6 @@ const createRentalSpace = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default createRentalSpace;

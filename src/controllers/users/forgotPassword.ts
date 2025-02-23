@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import userService from '../../services/user';
 import { validateJoiSchema } from '../../utils/joi';
 import { hashPassword } from '../../utils';
@@ -17,7 +16,7 @@ const userSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
-const forgotPassword = catchAsync(async (req: Request, res: Response) => {
+const forgotPassword = async (req: Request, res: Response) => {
   try {
     const validatedBody = validateJoiSchema(userSchema, req.body);
     await userService.forgotPassword(
@@ -34,6 +33,6 @@ const forgotPassword = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default forgotPassword;

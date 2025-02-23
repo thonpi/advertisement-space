@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import Joi from 'joi';
 import { validateJoiSchema } from '../../utils/joi';
 import designJobService from '../../services/designJob';
@@ -8,7 +7,7 @@ const designJobSchema = Joi.object({
   id: Joi.string().required(),
 });
 
-const getDesignJobById = catchAsync(async (req: Request, res: Response) => {
+const getDesignJobById = async (req: Request, res: Response) => {
   try {
     const validatedBody = validateJoiSchema(designJobSchema, req.body);
     const resData = await designJobService.findOneOrNotFoundById(
@@ -25,6 +24,6 @@ const getDesignJobById = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default getDesignJobById;

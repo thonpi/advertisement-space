@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import designJobService from '../../services/designJob';
 
-const designJobPagination = catchAsync(async (req: Request, res: Response) => {
+const designJobPagination = async (req: Request, res: Response) => {
   try {
     const resData = await designJobService.designJobPagination({
       page: parseInt((req.query.page || '1') as string),
@@ -19,6 +18,6 @@ const designJobPagination = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default designJobPagination;

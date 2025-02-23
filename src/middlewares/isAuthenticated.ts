@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import { verifyToken } from '../utils/jwt';
 import { AuthJwtPayload } from '../utils/generateAuthToken';
 import sessionService from '../services/session';
+import userService from '../services/user';
+import { excludeUserSensitiveData } from '../utils';
 
 const isAuthenticated = async (
   req: Request,
@@ -37,7 +39,10 @@ const isAuthenticated = async (
       .json({ code: 403, error: 'No session found. Login again' });
   }
 
-  next();
+  const user = await userService.findOneOrNotFoundById(payload.id);
+  (req as any).user = excludeUserSensitiveData(user);
+
+  return next();
 };
 
 export default isAuthenticated;

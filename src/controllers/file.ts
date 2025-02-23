@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import catchAsync from '../utils/catchAsync';
-import fileService from '../services/file';
 
-const uploadImage = catchAsync(async (req: Request, res: Response) => {
+const uploadImage = async (req: Request, res: Response) => {
   try {
     if (!req.file) {
       throw new Error('No file uploaded');
@@ -26,6 +24,6 @@ const uploadImage = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default uploadImage;

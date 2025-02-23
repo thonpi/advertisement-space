@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
-import catchAsync from '../../utils/catchAsync';
 import rentalSpaceService from '../../services/rentalSpace';
 
-const getAllRentalSpaces = catchAsync(async (req: Request, res: Response) => {
+const getAllRentalSpaces = async (req: Request, res: Response) => {
   try {
     const resData = await rentalSpaceService.getAllRentalSpaces();
     res.status(200).json({
@@ -16,6 +15,6 @@ const getAllRentalSpaces = catchAsync(async (req: Request, res: Response) => {
       message: error.message,
     });
   }
-});
+};
 
 export default getAllRentalSpaces;
